@@ -1,0 +1,54 @@
+[2026-10-01 07:38:25.775 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (295ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Banks" AS b)
+[2026-10-01 07:38:25.952 +01:00 INF] : Starting Micro-Lending API web host...
+[2026-10-01 07:38:26.558 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-10-01 07:38:26.563 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-10-01 07:38:27.245 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-10-01 07:38:27.264 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-10-01 07:38:27.270 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI
+[2026-10-01 07:38:40.896 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (239ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT b."Id", b."Name", b."Code"
+FROM "Banks" AS b
+ORDER BY b."Name"
+[2026-10-01 07:39:29.867 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (243ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Banks" AS b)
+[2026-10-01 07:39:30.143 +01:00 INF] : Starting Micro-Lending API web host...
+[2026-10-01 07:39:30.741 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-10-01 07:39:30.745 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-10-01 07:39:31.138 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-10-01 07:39:31.143 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-10-01 07:39:31.147 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI
+[2026-10-01 07:47:30.233 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (201ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Banks" AS b)
+[2026-10-01 07:47:30.397 +01:00 INF] : Starting Micro-Lending API web host...
+[2026-10-01 07:47:30.854 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-10-01 07:47:30.858 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-10-01 07:47:31.365 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-10-01 07:47:31.417 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-10-01 07:47:31.436 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI
+[2026-10-01 07:51:31.669 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (285ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Banks" AS b)
+[2026-10-01 07:51:31.804 +01:00 INF] : Starting Micro-Lending API web host...
+[2026-10-01 07:51:32.156 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-10-01 07:51:32.161 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-10-01 07:51:32.478 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-10-01 07:51:32.481 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-10-01 07:51:32.483 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI
+[2026-10-01 07:55:09.655 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (278ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Banks" AS b)
+[2026-10-01 07:55:09.778 +01:00 INF] : Starting Micro-Lending API web host...
+[2026-10-01 07:55:10.092 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-10-01 07:55:10.097 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-10-01 07:55:10.413 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-10-01 07:55:10.415 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-10-01 07:55:10.418 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI

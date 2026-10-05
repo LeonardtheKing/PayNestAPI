@@ -1,0 +1,24 @@
+[2026-09-27 23:53:41.011 +01:00 INF] : Starting Micro-Lending API web host...
+[2026-09-27 23:53:41.545 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-09-27 23:53:41.553 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-09-27 23:53:41.619 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-09-27 23:53:41.621 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-09-27 23:53:41.624 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI
+[2026-09-27 23:55:37.202 +01:00 INF] LoanAPI.Controllers.WebhookController: Received Paystack webhook event: charge.success
+[2026-09-27 23:56:16.217 +01:00 INF] LoanAPI.Controllers.WebhookController: Raw metadata for reference TXN_76C4047F-7 (ValueKind="String"): ""
+[2026-09-27 23:56:52.242 +01:00 WRN] LoanAPI.Controllers.WebhookController: charge.success payload missing or invalid metadata.user_id for reference TXN_76C4047F-7.
+[2026-09-27 23:56:52.618 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (75,401ms) [Parameters=[@dto_UserId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS u
+    WHERE u."Id" = @dto_UserId)
+[2026-09-27 23:56:52.722 +01:00 INF] System.Net.Http.HttpClient.Default.LogicalHandler: Start processing HTTP request POST https://api.paystack.co/transaction/initialize
+[2026-09-27 23:56:52.740 +01:00 INF] System.Net.Http.HttpClient.Default.ClientHandler: Sending HTTP request POST https://api.paystack.co/transaction/initialize
+[2026-09-27 23:56:53.806 +01:00 INF] System.Net.Http.HttpClient.Default.ClientHandler: Received HTTP response headers after 1058.143ms - 200
+[2026-09-27 23:56:53.820 +01:00 INF] System.Net.Http.HttpClient.Default.LogicalHandler: End processing HTTP request after 1102.8298ms - 200
+[2026-09-27 23:59:53.716 +01:00 INF] : Starting Micro-Lending API web host...
+[2026-09-27 23:59:54.383 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-09-27 23:59:54.390 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-09-27 23:59:54.451 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-09-27 23:59:54.455 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-09-27 23:59:54.457 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI

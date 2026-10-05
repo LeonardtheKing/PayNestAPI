@@ -1,0 +1,148 @@
+[2026-09-29 04:28:39.241 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (194ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+[2026-09-29 04:28:39.640 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (183ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+[2026-09-29 04:28:39.893 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (193ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+[2026-09-29 04:28:40.250 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (184ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+[2026-09-29 04:28:40.416 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (166ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+[2026-09-29 04:28:40.636 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (173ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Transactions" DROP CONSTRAINT "FK_Transactions_Wallets_WalletId";
+[2026-09-29 04:28:40.817 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (180ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DROP TABLE "Loans";
+[2026-09-29 04:28:41.014 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (196ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DROP TABLE "Wallets";
+[2026-09-29 04:28:41.185 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (172ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Transactions" RENAME COLUMN "WalletId" TO "AccountId";
+[2026-09-29 04:28:41.373 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (187ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER INDEX "IX_Transactions_WalletId" RENAME TO "IX_Transactions_AccountId";
+[2026-09-29 04:28:41.541 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (168ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Users" ADD "AccountNumber" text NOT NULL DEFAULT '';
+[2026-09-29 04:28:41.710 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (168ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Users" ADD "BankName" text NOT NULL DEFAULT '';
+[2026-09-29 04:28:41.887 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (177ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Accounts" (
+    "Id" uuid NOT NULL,
+    "AccountNumber" text NOT NULL,
+    "AccountName" text NOT NULL,
+    "Balance" numeric NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "UpdatedAt" timestamp with time zone NOT NULL,
+    "UserId" uuid NOT NULL,
+    "BankId" uuid NOT NULL,
+    CONSTRAINT "PK_Accounts" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Accounts_Banks_BankId" FOREIGN KEY ("BankId") REFERENCES "Banks" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_Accounts_Users_UserId" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE CASCADE
+);
+[2026-09-29 04:28:42.076 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (188ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Accounts_BankId" ON "Accounts" ("BankId");
+[2026-09-29 04:28:42.247 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (171ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_Accounts_UserId" ON "Accounts" ("UserId");
+[2026-09-29 04:28:42.419 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (172ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Transactions" ADD CONSTRAINT "FK_Transactions_Accounts_AccountId" FOREIGN KEY ("AccountId") REFERENCES "Accounts" ("Id") ON DELETE CASCADE;
+[2026-09-29 04:28:42.588 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (169ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20260929032817_ddd', '10.0.12');
+[2026-09-29 04:40:20.201 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (207ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Banks" AS b)
+[2026-09-29 04:40:20.609 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-09-29 04:40:20.613 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-09-29 04:40:20.975 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-09-29 04:40:21.007 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-09-29 04:40:21.066 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI
+[2026-09-29 04:59:20.740 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (200ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+[2026-09-29 04:59:21.149 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (202ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+[2026-09-29 04:59:21.387 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (183ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+[2026-09-29 04:59:21.762 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (177ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+[2026-09-29 04:59:21.939 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (176ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+[2026-09-29 04:59:22.131 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (178ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Transactions" ADD "Channel" text NOT NULL DEFAULT '';
+[2026-09-29 04:59:22.326 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (195ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20260929035902_ww', '10.0.12');
+[2026-09-29 05:26:55.346 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (179ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+[2026-09-29 05:26:55.712 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (177ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+[2026-09-29 05:26:55.942 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (181ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+[2026-09-29 05:26:56.276 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (167ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+[2026-09-29 05:26:56.443 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (167ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+[2026-09-29 05:26:56.645 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (190ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Transactions" ADD "BankName" text NOT NULL DEFAULT '';
+[2026-09-29 05:26:56.832 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (186ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Transactions" ADD "Narration" text NOT NULL DEFAULT '';
+[2026-09-29 05:26:56.995 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (163ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20260929042641_www', '10.0.12');
+[2026-09-29 05:29:05.427 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (196ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Banks" AS b)
+[2026-09-29 05:29:05.860 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-09-29 05:29:05.865 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-09-29 05:29:06.022 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-09-29 05:29:06.025 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-09-29 05:29:06.028 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI
+[2026-09-29 05:32:00.476 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (237ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Banks" AS b)
+[2026-09-29 05:32:00.772 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-09-29 05:32:00.777 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-09-29 05:32:00.901 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-09-29 05:32:00.904 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-09-29 05:32:00.905 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI
+[2026-09-29 05:33:48.320 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (206ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Banks" AS b)
+[2026-09-29 05:33:48.607 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-09-29 05:33:48.613 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-09-29 05:33:48.963 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-09-29 05:33:48.966 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-09-29 05:33:48.968 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI
+[2026-09-29 05:35:43.762 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (200ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Banks" AS b)
+[2026-09-29 05:35:44.134 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-09-29 05:35:44.139 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-09-29 05:35:44.243 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-09-29 05:35:44.246 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-09-29 05:35:44.250 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI

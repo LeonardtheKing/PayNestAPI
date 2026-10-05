@@ -1,0 +1,582 @@
+[2026-09-30 15:25:58.029 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (189ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+[2026-09-30 15:25:58.402 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (181ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+[2026-09-30 15:25:58.661 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (194ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+[2026-09-30 15:25:59.033 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (187ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+[2026-09-30 15:25:59.235 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (202ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+[2026-09-30 15:25:59.396 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (144ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Transactions" DROP CONSTRAINT "FK_Transactions_Beneficiaries_BeneficiaryId";
+[2026-09-30 15:25:59.587 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (191ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DROP INDEX "IX_Transactions_BeneficiaryId";
+[2026-09-30 15:25:59.729 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (142ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Transactions" DROP COLUMN "BeneficiaryId";
+[2026-09-30 15:25:59.894 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (165ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Beneficiaries" ADD "SenderId" uuid NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
+[2026-09-30 15:26:00.041 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (146ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20260930142542_qq', '10.0.12');
+[2026-09-30 15:26:09.671 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (203ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Banks" AS b)
+[2026-09-30 15:26:09.793 +01:00 INF] : Starting Micro-Lending API web host...
+[2026-09-30 15:26:10.247 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-09-30 15:26:10.251 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-09-30 15:26:10.975 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-09-30 15:26:10.996 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-09-30 15:26:11.012 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI
+[2026-09-30 15:26:35.772 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (178ms) [Parameters=[@dto_UserId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS u
+    WHERE u."Id" = @dto_UserId)
+[2026-09-30 15:26:35.816 +01:00 INF] System.Net.Http.HttpClient.Default.LogicalHandler: Start processing HTTP request POST https://api.paystack.co/transaction/initialize
+[2026-09-30 15:26:35.830 +01:00 INF] System.Net.Http.HttpClient.Default.ClientHandler: Sending HTTP request POST https://api.paystack.co/transaction/initialize
+[2026-09-30 15:26:36.821 +01:00 INF] System.Net.Http.HttpClient.Default.ClientHandler: Received HTTP response headers after 982.8595ms - 200
+[2026-09-30 15:26:36.830 +01:00 INF] System.Net.Http.HttpClient.Default.LogicalHandler: End processing HTTP request after 1018.2023ms - 200
+[2026-09-30 15:27:48.140 +01:00 INF] LoanAPI.Controllers.WebhookController: Received Paystack webhook event: charge.success
+[2026-09-30 15:27:48.140 +01:00 INF] LoanAPI.Controllers.WebhookController: Received Paystack webhook event: charge.success
+[2026-09-30 15:28:33.847 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (183ms) [Parameters=[@reference='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT t."Id", t."AccountId", t."Amount", t."Channel", t."DateCreated", t."IsProcessed", t."Narration", t."Reference", t."Status", t."Type"
+FROM "Transactions" AS t
+WHERE t."Reference" = @reference
+LIMIT 1
+[2026-09-30 15:28:44.932 +01:00 INF] LoanAPI.Services.TransactionProcessingService: Reference TXN_8CF658F1-4 already recorded, skipping duplicate webhook.
+[2026-09-30 15:28:58.172 +01:00 ERR] Microsoft.EntityFrameworkCore.Database.Connection: An error occurred using the connection to database 'defaultdb' on server 'tcp://pg-3be348e9-leonardizuchukwu3-81ae.d.aivencloud.com:14353'.
+[2026-09-30 15:28:59.470 +01:00 ERR] Microsoft.EntityFrameworkCore.Query: An exception occurred while iterating over the results of a query for context type 'AppDbContext'.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): The operation has timed out
+ ---> System.TimeoutException: The operation has timed out.
+   at Npgsql.ThrowHelper.ThrowNpgsqlExceptionWithInnerTimeoutException(String message)
+   at Npgsql.Util.NpgsqlTimeout.Check()
+   at Npgsql.Util.NpgsqlTimeout.CheckAndGetTimeLeft()
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): The operation has timed out
+ ---> System.TimeoutException: The operation has timed out.
+   at Npgsql.ThrowHelper.ThrowNpgsqlExceptionWithInnerTimeoutException(String message)
+   at Npgsql.Util.NpgsqlTimeout.Check()
+   at Npgsql.Util.NpgsqlTimeout.CheckAndGetTimeLeft()
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+[2026-09-30 15:30:01.109 +01:00 INF] LoanAPI.Controllers.WebhookController: Received Paystack webhook event: charge.success
+[2026-09-30 15:30:16.091 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (199ms) [Parameters=[@reference='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT t."Id", t."AccountId", t."Amount", t."Channel", t."DateCreated", t."IsProcessed", t."Narration", t."Reference", t."Status", t."Type"
+FROM "Transactions" AS t
+WHERE t."Reference" = @reference
+LIMIT 1
+[2026-09-30 15:30:16.100 +01:00 INF] LoanAPI.Services.TransactionProcessingService: Reference TXN_8CF658F1-4 already recorded, skipping duplicate webhook.
+[2026-09-30 15:31:29.065 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (238ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Banks" AS b)
+[2026-09-30 15:31:29.206 +01:00 INF] : Starting Micro-Lending API web host...
+[2026-09-30 15:31:29.550 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-09-30 15:31:29.554 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-09-30 15:31:30.001 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-09-30 15:31:30.003 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-09-30 15:31:30.005 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI
+[2026-09-30 15:59:32.746 +01:00 ERR] Microsoft.EntityFrameworkCore.Database.Connection: An error occurred using the connection to database 'defaultdb' on server 'tcp://pg-3be348e9-leonardizuchukwu3-81ae.d.aivencloud.com:14353'.
+[2026-09-30 15:59:33.352 +01:00 ERR] Microsoft.EntityFrameworkCore.Query: An exception occurred while iterating over the results of a query for context type 'AppDbContext'.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): No such host is known.
+ ---> System.Net.Sockets.SocketException (0x00002AF9): No such host is known.
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at Npgsql.Internal.NpgsqlConnector.Connect(NpgsqlTimeout timeout)
+   at Npgsql.Internal.NpgsqlConnector.Connect(NpgsqlTimeout timeout)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.Open()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnection(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternal(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.Open(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(Enumerator enumerator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.<>c.<MoveNext>b__21_0(DbContext _, Enumerator enumerator)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): No such host is known.
+ ---> System.Net.Sockets.SocketException (0x00002AF9): No such host is known.
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at Npgsql.Internal.NpgsqlConnector.Connect(NpgsqlTimeout timeout)
+   at Npgsql.Internal.NpgsqlConnector.Connect(NpgsqlTimeout timeout)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.Open()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnection(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternal(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.Open(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(Enumerator enumerator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.<>c.<MoveNext>b__21_0(DbContext _, Enumerator enumerator)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+[2026-09-30 15:59:33.896 +01:00 ERR] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware: An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): No such host is known.
+ ---> System.Net.Sockets.SocketException (0x00002AF9): No such host is known.
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at Npgsql.Internal.NpgsqlConnector.Connect(NpgsqlTimeout timeout)
+   at Npgsql.Internal.NpgsqlConnector.Connect(NpgsqlTimeout timeout)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.Open()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnection(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternal(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.Open(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(Enumerator enumerator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.<>c.<MoveNext>b__21_0(DbContext _, Enumerator enumerator)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Linq.Enumerable.TryGetSingle[TSource](IEnumerable`1 source, Boolean& found)
+   at lambda_method16(Closure, QueryContext)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteCore[TResult](Expression query, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.Execute[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryProvider.Execute[TResult](Expression expression)
+   at LoanAPI.Controllers.PaymentController.InitializePayment(InitializePaymentDto dto) in C:\Users\LENOVO\Desktop\Personal\LoanAPI\Controllers\PaymentController.cs:line 35
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Sentry.AspNetCore.SentryTracingMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2026-09-30 16:00:19.910 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (201ms) [Parameters=[@dto_UserId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS u
+    WHERE u."Id" = @dto_UserId)
+[2026-09-30 16:00:19.936 +01:00 INF] System.Net.Http.HttpClient.Default.LogicalHandler: Start processing HTTP request POST https://api.paystack.co/transaction/initialize
+[2026-09-30 16:00:19.953 +01:00 INF] System.Net.Http.HttpClient.Default.ClientHandler: Sending HTTP request POST https://api.paystack.co/transaction/initialize
+[2026-09-30 16:00:21.349 +01:00 INF] System.Net.Http.HttpClient.Default.ClientHandler: Received HTTP response headers after 1388.9523ms - 200
+[2026-09-30 16:00:21.360 +01:00 INF] System.Net.Http.HttpClient.Default.LogicalHandler: End processing HTTP request after 1424.5087ms - 200
+[2026-09-30 16:02:09.817 +01:00 INF] LoanAPI.Controllers.WebhookController: Received Paystack webhook event: charge.success
+[2026-09-30 16:03:07.111 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (224ms) [Parameters=[@reference='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT t."Id", t."AccountId", t."Amount", t."Channel", t."DateCreated", t."IsProcessed", t."Narration", t."Reference", t."Status", t."Type"
+FROM "Transactions" AS t
+WHERE t."Reference" = @reference
+LIMIT 1
+[2026-09-30 16:03:10.702 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (286ms) [Parameters=[@userId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccountName", a."AccountNumber", a."Balance", a."BankId", a."CreatedAt", a."UpdatedAt", a."UserId"
+FROM "Accounts" AS a
+WHERE a."UserId" = @userId
+LIMIT 1
+[2026-09-30 16:03:20.942 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (301ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Decimal), @p1='?' (DbType = DateTime), @p3='?' (DbType = Guid), @p4='?' (DbType = Guid), @p5='?' (DbType = Decimal), @p6='?', @p7='?' (DbType = DateTime), @p8='?' (DbType = Boolean), @p9='?', @p10='?', @p11='?', @p12='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Accounts" SET "Balance" = @p0, "UpdatedAt" = @p1
+WHERE "Id" = @p2;
+INSERT INTO "Transactions" ("Id", "AccountId", "Amount", "Channel", "DateCreated", "IsProcessed", "Narration", "Reference", "Status", "Type")
+VALUES (@p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12);
+[2026-09-30 16:03:27.572 +01:00 INF] LoanAPI.Services.TransactionProcessingService: Created transaction TXN_D15DFF2C-2 via card and credited account "722c282d-a53c-43a9-9d74-32c25b1f0c62" with 1000.
+[2026-09-30 16:07:36.198 +01:00 INF] LoanAPI.Controllers.WebhookController: Received Paystack webhook event: charge.success
+[2026-09-30 16:08:03.747 +01:00 ERR] Microsoft.EntityFrameworkCore.Database.Connection: An error occurred using the connection to database 'defaultdb' on server 'tcp://pg-3be348e9-leonardizuchukwu3-81ae.d.aivencloud.com:14353'.
+[2026-09-30 16:08:05.089 +01:00 ERR] Microsoft.EntityFrameworkCore.Query: An exception occurred while iterating over the results of a query for context type 'AppDbContext'.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): The operation has timed out
+ ---> System.TimeoutException: The operation has timed out.
+   at Npgsql.ThrowHelper.ThrowNpgsqlExceptionWithInnerTimeoutException(String message)
+   at Npgsql.Util.NpgsqlTimeout.Check()
+   at Npgsql.Util.NpgsqlTimeout.CheckAndGetTimeLeft()
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): The operation has timed out
+ ---> System.TimeoutException: The operation has timed out.
+   at Npgsql.ThrowHelper.ThrowNpgsqlExceptionWithInnerTimeoutException(String message)
+   at Npgsql.Util.NpgsqlTimeout.Check()
+   at Npgsql.Util.NpgsqlTimeout.CheckAndGetTimeLeft()
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+[2026-09-30 16:08:05.377 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (183ms) [Parameters=[@request_SenderUserId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccountName", a."AccountNumber", a."Balance", a."BankId", a."CreatedAt", a."UpdatedAt", a."UserId"
+FROM "Accounts" AS a
+WHERE a."UserId" = @request_SenderUserId
+LIMIT 1
+[2026-09-30 16:08:05.377 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (202ms) [Parameters=[@request_SenderUserId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccountName", a."AccountNumber", a."Balance", a."BankId", a."CreatedAt", a."UpdatedAt", a."UserId"
+FROM "Accounts" AS a
+WHERE a."UserId" = @request_SenderUserId
+LIMIT 1
+[2026-09-30 16:08:51.890 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (243ms) [Parameters=[@request_BeneficiaryId='?' (DbType = Guid), @request_SenderUserId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT b."Id", b."AccountName", b."AccountNumber", b."BankCode", b."BankName", b."DateCreated", b."SenderId", b."UserId"
+FROM "Beneficiaries" AS b
+WHERE b."Id" = @request_BeneficiaryId AND b."SenderId" = @request_SenderUserId
+LIMIT 1
+[2026-09-30 16:20:23.426 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (226ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Banks" AS b)
+[2026-09-30 16:20:23.578 +01:00 INF] : Starting Micro-Lending API web host...
+[2026-09-30 16:20:24.152 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-09-30 16:20:24.160 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-09-30 16:20:24.652 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-09-30 16:20:24.655 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-09-30 16:20:24.658 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI
+[2026-09-30 16:20:37.892 +01:00 INF] LoanAPI.Controllers.WebhookController: Received Paystack webhook event: charge.success
+[2026-09-30 16:20:40.033 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (201ms) [Parameters=[@reference='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT t."Id", t."AccountId", t."Amount", t."Channel", t."DateCreated", t."IsProcessed", t."Narration", t."Reference", t."Status", t."Type"
+FROM "Transactions" AS t
+WHERE t."Reference" = @reference
+LIMIT 1
+[2026-09-30 16:20:40.181 +01:00 INF] LoanAPI.Services.TransactionProcessingService: Reference TXN_D15DFF2C-2 already recorded, skipping duplicate webhook.
+[2026-09-30 17:14:39.738 +01:00 INF] LoanAPI.Controllers.WebhookController: Received Paystack webhook event: charge.success
+[2026-09-30 17:14:44.575 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (174ms) [Parameters=[@reference='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT t."Id", t."AccountId", t."Amount", t."Channel", t."DateCreated", t."IsProcessed", t."Narration", t."Reference", t."Status", t."Type"
+FROM "Transactions" AS t
+WHERE t."Reference" = @reference
+LIMIT 1
+[2026-09-30 17:14:44.781 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (188ms) [Parameters=[@userId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccountName", a."AccountNumber", a."Balance", a."BankId", a."CreatedAt", a."UpdatedAt", a."UserId"
+FROM "Accounts" AS a
+WHERE a."UserId" = @userId
+LIMIT 1
+[2026-09-30 17:14:45.540 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (213ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Decimal), @p1='?' (DbType = DateTime), @p3='?' (DbType = Guid), @p4='?' (DbType = Guid), @p5='?' (DbType = Decimal), @p6='?', @p7='?' (DbType = DateTime), @p8='?' (DbType = Boolean), @p9='?', @p10='?', @p11='?', @p12='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Accounts" SET "Balance" = @p0, "UpdatedAt" = @p1
+WHERE "Id" = @p2;
+INSERT INTO "Transactions" ("Id", "AccountId", "Amount", "Channel", "DateCreated", "IsProcessed", "Narration", "Reference", "Status", "Type")
+VALUES (@p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12);
+[2026-09-30 17:14:45.924 +01:00 INF] LoanAPI.Services.TransactionProcessingService: Created transaction TXN_ED24274E-2 via card and credited account "722c282d-a53c-43a9-9d74-32c25b1f0c62" with 1000.
+[2026-09-30 17:16:14.520 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (195ms) [Parameters=[@request_SenderUserId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccountName", a."AccountNumber", a."Balance", a."BankId", a."CreatedAt", a."UpdatedAt", a."UserId"
+FROM "Accounts" AS a
+WHERE a."UserId" = @request_SenderUserId
+LIMIT 1
+[2026-09-30 17:16:16.170 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (186ms) [Parameters=[@request_BeneficiaryId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccountName", a."AccountNumber", a."Balance", a."BankId", a."CreatedAt", a."UpdatedAt", a."UserId"
+FROM "Accounts" AS a
+WHERE a."UserId" = @request_BeneficiaryId
+LIMIT 1
+[2026-09-30 17:30:44.217 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (220ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Banks" AS b)
+[2026-09-30 17:30:44.367 +01:00 INF] : Starting Micro-Lending API web host...
+[2026-09-30 17:30:44.768 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-09-30 17:30:44.771 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-09-30 17:30:45.657 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-09-30 17:30:45.691 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-09-30 17:30:45.708 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI
+[2026-09-30 17:32:39.535 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (181ms) [Parameters=[@_8__locals1_request_SenderUserId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccountName", a."AccountNumber", a."Balance", a."BankId", a."CreatedAt", a."UpdatedAt", a."UserId"
+FROM "Accounts" AS a
+WHERE a."UserId" = @_8__locals1_request_SenderUserId
+LIMIT 1
+[2026-09-30 17:32:42.388 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (157ms) [Parameters=[@_8__locals1_request_BeneficiaryId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccountName", a."AccountNumber", a."Balance", a."BankId", a."CreatedAt", a."UpdatedAt", a."UserId", b."Id", b."Code", b."Name"
+FROM "Accounts" AS a
+INNER JOIN "Banks" AS b ON a."BankId" = b."Id"
+WHERE a."UserId" = @_8__locals1_request_BeneficiaryId
+LIMIT 1
+[2026-09-30 17:33:09.166 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (200ms) [Parameters=[@_8__locals1_request_SenderUserId='?' (DbType = Guid), @beneficiaryAccount_AccountNumber='?', @beneficiaryAccount_Bank_Code='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT b."Id", b."AccountName", b."AccountNumber", b."BankCode", b."BankName", b."DateCreated", b."SenderId", b."UserId"
+FROM "Beneficiaries" AS b
+WHERE b."SenderId" = @_8__locals1_request_SenderUserId AND b."AccountNumber" = @beneficiaryAccount_AccountNumber AND b."BankCode" = @beneficiaryAccount_Bank_Code
+LIMIT 1
+[2026-09-30 17:33:29.263 +01:00 INF] LoanAPI.Controllers.BankController: Creating new beneficiary 1944774947 for user "a0152571-4056-474c-89d3-e5758a9965ef"
+[2026-09-30 17:33:41.576 +01:00 ERR] Microsoft.EntityFrameworkCore.Database.Command: Failed executing DbCommand (293ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Decimal), @p1='?' (DbType = DateTime), @p5='?' (DbType = Guid), @p3='?' (DbType = Decimal), @p4='?' (DbType = DateTime), @p6='?' (DbType = Guid), @p7='?', @p8='?', @p9='?', @p10='?', @p11='?' (DbType = DateTime), @p12='?' (DbType = Guid), @p13='?' (DbType = Guid), @p14='?' (DbType = Guid), @p15='?' (DbType = Guid), @p16='?' (DbType = Decimal), @p17='?', @p18='?' (DbType = DateTime), @p19='?' (DbType = Boolean), @p20='?', @p21='?', @p22='?', @p23='?', @p24='?' (DbType = Guid), @p25='?' (DbType = Guid), @p26='?' (DbType = Decimal), @p27='?', @p28='?' (DbType = DateTime), @p29='?' (DbType = Boolean), @p30='?', @p31='?', @p32='?', @p33='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Accounts" SET "Balance" = @p0, "UpdatedAt" = @p1
+WHERE "Id" = @p2;
+UPDATE "Accounts" SET "Balance" = @p3, "UpdatedAt" = @p4
+WHERE "Id" = @p5;
+INSERT INTO "Beneficiaries" ("Id", "AccountName", "AccountNumber", "BankCode", "BankName", "DateCreated", "SenderId", "UserId")
+VALUES (@p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13);
+INSERT INTO "Transactions" ("Id", "AccountId", "Amount", "Channel", "DateCreated", "IsProcessed", "Narration", "Reference", "Status", "Type")
+VALUES (@p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23);
+INSERT INTO "Transactions" ("Id", "AccountId", "Amount", "Channel", "DateCreated", "IsProcessed", "Narration", "Reference", "Status", "Type")
+VALUES (@p24, @p25, @p26, @p27, @p28, @p29, @p30, @p31, @p32, @p33);
+[2026-09-30 17:33:43.704 +01:00 ERR] Microsoft.EntityFrameworkCore.Update: An exception occurred in the database while saving changes for context type 'AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "Beneficiaries" violates foreign key constraint "FK_Beneficiaries_Users_UserId"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "Beneficiaries" violates foreign key constraint "FK_Beneficiaries_Users_UserId"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: Beneficiaries
+    ConstraintName: FK_Beneficiaries_Users_UserId
+    File: ri_triggers.c
+    Line: 2772
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "Beneficiaries" violates foreign key constraint "FK_Beneficiaries_Users_UserId"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "Beneficiaries" violates foreign key constraint "FK_Beneficiaries_Users_UserId"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: Beneficiaries
+    ConstraintName: FK_Beneficiaries_Users_UserId
+    File: ri_triggers.c
+    Line: 2772
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+[2026-09-30 17:49:56.823 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (199ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Banks" AS b)
+[2026-09-30 17:49:56.982 +01:00 INF] : Starting Micro-Lending API web host...
+[2026-09-30 17:49:57.309 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-09-30 17:49:57.313 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-09-30 17:49:57.538 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-09-30 17:49:57.540 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-09-30 17:49:57.542 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI
+[2026-09-30 17:51:52.001 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (185ms) [Parameters=[@_8__locals1_request_SenderUserId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccountName", a."AccountNumber", a."Balance", a."BankId", a."CreatedAt", a."UpdatedAt", a."UserId"
+FROM "Accounts" AS a
+WHERE a."UserId" = @_8__locals1_request_SenderUserId
+LIMIT 1
+[2026-09-30 17:51:54.582 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (180ms) [Parameters=[@_8__locals1_request_BeneficiaryId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccountName", a."AccountNumber", a."Balance", a."BankId", a."CreatedAt", a."UpdatedAt", a."UserId", b."Id", b."Code", b."Name"
+FROM "Accounts" AS a
+INNER JOIN "Banks" AS b ON a."BankId" = b."Id"
+WHERE a."UserId" = @_8__locals1_request_BeneficiaryId
+LIMIT 1
+[2026-09-30 17:52:02.727 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (320ms) [Parameters=[@_8__locals1_request_SenderUserId='?' (DbType = Guid), @beneficiaryAccount_AccountNumber='?', @beneficiaryAccount_Bank_Code='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT b."Id", b."AccountName", b."AccountNumber", b."BankCode", b."BankName", b."DateCreated", b."SenderId", b."UserId"
+FROM "Beneficiaries" AS b
+WHERE b."SenderId" = @_8__locals1_request_SenderUserId AND b."AccountNumber" = @beneficiaryAccount_AccountNumber AND b."BankCode" = @beneficiaryAccount_Bank_Code
+LIMIT 1
+[2026-09-30 17:57:49.018 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (191ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Banks" AS b)
+[2026-09-30 17:57:49.131 +01:00 INF] : Starting Micro-Lending API web host...
+[2026-09-30 17:57:49.491 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7041
+[2026-09-30 17:57:49.495 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:5146
+[2026-09-30 17:57:50.026 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-09-30 17:57:50.028 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-09-30 17:57:50.031 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\LENOVO\Desktop\Personal\LoanAPI
+[2026-09-30 17:59:40.584 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (280ms) [Parameters=[@_8__locals1_request_SenderUserId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccountName", a."AccountNumber", a."Balance", a."BankId", a."CreatedAt", a."UpdatedAt", a."UserId"
+FROM "Accounts" AS a
+WHERE a."UserId" = @_8__locals1_request_SenderUserId
+LIMIT 1
+[2026-09-30 17:59:42.891 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (240ms) [Parameters=[@_8__locals1_request_BeneficiaryId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccountName", a."AccountNumber", a."Balance", a."BankId", a."CreatedAt", a."UpdatedAt", a."UserId", b."Id", b."Code", b."Name"
+FROM "Accounts" AS a
+INNER JOIN "Banks" AS b ON a."BankId" = b."Id"
+WHERE a."UserId" = @_8__locals1_request_BeneficiaryId
+LIMIT 1
+[2026-09-30 17:59:50.870 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (241ms) [Parameters=[@_8__locals1_request_SenderUserId='?' (DbType = Guid), @beneficiaryAccount_AccountNumber='?', @beneficiaryAccount_Bank_Code='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT b."Id", b."AccountName", b."AccountNumber", b."BankCode", b."BankName", b."DateCreated", b."SenderId", b."UserId"
+FROM "Beneficiaries" AS b
+WHERE b."SenderId" = @_8__locals1_request_SenderUserId AND b."AccountNumber" = @beneficiaryAccount_AccountNumber AND b."BankCode" = @beneficiaryAccount_Bank_Code
+LIMIT 1
+[2026-09-30 18:00:00.107 +01:00 INF] LoanAPI.Controllers.BankController: Creating new beneficiary 1944774947 for user "a0152571-4056-474c-89d3-e5758a9965ef"
+[2026-09-30 18:00:03.797 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (158ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Decimal), @p1='?' (DbType = DateTime), @p5='?' (DbType = Guid), @p3='?' (DbType = Decimal), @p4='?' (DbType = DateTime), @p6='?' (DbType = Guid), @p7='?', @p8='?', @p9='?', @p10='?', @p11='?' (DbType = DateTime), @p12='?' (DbType = Guid), @p13='?' (DbType = Guid), @p14='?' (DbType = Guid), @p15='?' (DbType = Guid), @p16='?' (DbType = Decimal), @p17='?', @p18='?' (DbType = DateTime), @p19='?' (DbType = Boolean), @p20='?', @p21='?', @p22='?', @p23='?', @p24='?' (DbType = Guid), @p25='?' (DbType = Guid), @p26='?' (DbType = Decimal), @p27='?', @p28='?' (DbType = DateTime), @p29='?' (DbType = Boolean), @p30='?', @p31='?', @p32='?', @p33='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Accounts" SET "Balance" = @p0, "UpdatedAt" = @p1
+WHERE "Id" = @p2;
+UPDATE "Accounts" SET "Balance" = @p3, "UpdatedAt" = @p4
+WHERE "Id" = @p5;
+INSERT INTO "Beneficiaries" ("Id", "AccountName", "AccountNumber", "BankCode", "BankName", "DateCreated", "SenderId", "UserId")
+VALUES (@p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13);
+INSERT INTO "Transactions" ("Id", "AccountId", "Amount", "Channel", "DateCreated", "IsProcessed", "Narration", "Reference", "Status", "Type")
+VALUES (@p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23);
+INSERT INTO "Transactions" ("Id", "AccountId", "Amount", "Channel", "DateCreated", "IsProcessed", "Narration", "Reference", "Status", "Type")
+VALUES (@p24, @p25, @p26, @p27, @p28, @p29, @p30, @p31, @p32, @p33);
+[2026-09-30 18:00:04.163 +01:00 INF] LoanAPI.Controllers.BankController: Processed transfer of 210 from "a0152571-4056-474c-89d3-e5758a9965ef" to beneficiary "c057f4d4-c094-4bb0-aa18-32eb581bf686"
+[2026-09-30 18:03:39.889 +01:00 INF] LoanAPI.Controllers.WebhookController: Received Paystack webhook event: charge.success
+[2026-09-30 18:03:45.184 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (137ms) [Parameters=[@reference='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT t."Id", t."AccountId", t."Amount", t."Channel", t."DateCreated", t."IsProcessed", t."Narration", t."Reference", t."Status", t."Type"
+FROM "Transactions" AS t
+WHERE t."Reference" = @reference
+LIMIT 1
+[2026-09-30 18:03:45.244 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (159ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Transactions" AS t
+[2026-09-30 18:03:45.265 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (160ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Transactions" AS t
+[2026-09-30 18:03:45.426 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (227ms) [Parameters=[@userId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccountName", a."AccountNumber", a."Balance", a."BankId", a."CreatedAt", a."UpdatedAt", a."UserId"
+FROM "Accounts" AS a
+WHERE a."UserId" = @userId
+LIMIT 1
+[2026-09-30 18:03:45.503 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (198ms) [Parameters=[@p1='?' (DbType = Int32), @p='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT t0."Id", a."BankId", t0."Reference", t0."Amount", t0."Channel", t0."Type", t0."Status", t0."IsProcessed", t0."DateCreated"
+FROM (
+    SELECT t."Id", t."AccountId", t."Amount", t."Channel", t."DateCreated", t."IsProcessed", t."Reference", t."Status", t."Type"
+    FROM "Transactions" AS t
+    ORDER BY t."DateCreated" DESC
+    LIMIT @p1 OFFSET @p
+) AS t0
+INNER JOIN "Accounts" AS a ON t0."AccountId" = a."Id"
+ORDER BY t0."DateCreated" DESC
+[2026-09-30 18:03:45.506 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (201ms) [Parameters=[@p1='?' (DbType = Int32), @p='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT t0."Id", a."BankId", t0."Reference", t0."Amount", t0."Channel", t0."Type", t0."Status", t0."IsProcessed", t0."DateCreated"
+FROM (
+    SELECT t."Id", t."AccountId", t."Amount", t."Channel", t."DateCreated", t."IsProcessed", t."Reference", t."Status", t."Type"
+    FROM "Transactions" AS t
+    ORDER BY t."DateCreated" DESC
+    LIMIT @p1 OFFSET @p
+) AS t0
+INNER JOIN "Accounts" AS a ON t0."AccountId" = a."Id"
+ORDER BY t0."DateCreated" DESC
+[2026-09-30 18:03:45.809 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (217ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Decimal), @p1='?' (DbType = DateTime), @p3='?' (DbType = Guid), @p4='?' (DbType = Guid), @p5='?' (DbType = Decimal), @p6='?', @p7='?' (DbType = DateTime), @p8='?' (DbType = Boolean), @p9='?', @p10='?', @p11='?', @p12='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Accounts" SET "Balance" = @p0, "UpdatedAt" = @p1
+WHERE "Id" = @p2;
+INSERT INTO "Transactions" ("Id", "AccountId", "Amount", "Channel", "DateCreated", "IsProcessed", "Narration", "Reference", "Status", "Type")
+VALUES (@p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12);
+[2026-09-30 18:03:46.184 +01:00 INF] LoanAPI.Services.TransactionProcessingService: Created transaction TXN_A3EDBBE8-2 via card and credited account "722c282d-a53c-43a9-9d74-32c25b1f0c62" with 1000.
+[2026-09-30 18:06:58.751 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (228ms) [Parameters=[@userId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AccountNumber", u."BankName", u."DateCreated", u."Email", u."FullName", u."IsActive", u."PasswordHash", u."Phone", a."Id", a."AccountName", a."AccountNumber", a."Balance", a."BankId", a."CreatedAt", a."UpdatedAt", a."UserId", b."Id", b."Code", b."Name"
+FROM "Users" AS u
+LEFT JOIN "Accounts" AS a ON u."Id" = a."UserId"
+LEFT JOIN "Banks" AS b ON a."BankId" = b."Id"
+WHERE u."Id" = @userId
+LIMIT 1
+[2026-09-30 18:07:26.071 +01:00 INF] Microsoft.EntityFrameworkCore.Database.Command: Executed DbCommand (218ms) [Parameters=[@userId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AccountNumber", u."BankName", u."DateCreated", u."Email", u."FullName", u."IsActive", u."PasswordHash", u."Phone", a."Id", a."AccountName", a."AccountNumber", a."Balance", a."BankId", a."CreatedAt", a."UpdatedAt", a."UserId", b."Id", b."Code", b."Name"
+FROM "Users" AS u
+LEFT JOIN "Accounts" AS a ON u."Id" = a."UserId"
+LEFT JOIN "Banks" AS b ON a."BankId" = b."Id"
+WHERE u."Id" = @userId
+LIMIT 1
+[2026-09-30 18:07:26.096 +01:00 INF] LoanAPI.Controllers.UserController: Retrieved balance details for user ID "a0152571-4056-474c-89d3-e5758a9965ef".
